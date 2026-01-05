@@ -1,0 +1,87 @@
+.quiz-component {
+    padding: 20rpx 0;
+  }
+  
+  .quiz-progress {
+    margin-bottom: 30rpx;
+  }
+  
+  .progress-text {
+    display: block;
+    text-align: center;
+    font-size: 26rpx;
+    color: #666;
+    margin-bottom: 16rpx;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8rpx;
+    background: #f0f0f0;
+    border-radius: 4rpx;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: #4CAF50;
+    transition: width 0.3s ease;
+  }
+  
+  .question-card {
+    margin-bottom: 30rpx;
+  }
+  
+  .question-text {
+    font-size: 32rpx;
+    font-weight: bold;
+    margin-bottom: 30rpx;
+    line-height: 1.5;
+  }
+  
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20rpx;
+  }
+  
+  .option-item {
+    display: flex;
+    align-items: center;
+    padding: 24rpx;
+    border: 2rpx solid #e0e0e0;
+    border-radius: 12rpx;
+    transition: all 0.3s ease;
+  }
+  
+  .option-item.selected {
+    border-color: #4CAF50;
+    background: #E8F5E8;
+  }
+  
+  .option-label {
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    font-size: 24rpx;
+    font-weight: bold;
+  }
+  
+  .option-item.selected .option-label {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .option-text {
+    flex: 1;
+    font-size: 28rpx;
+    line-height: 1.4;
+  }
+  
+  .quiz-actions {
+    text-align: center;
+  }

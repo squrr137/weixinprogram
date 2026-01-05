@@ -1,0 +1,31 @@
+<view class="reminder-component">
+  <view class="reminder-list">
+    <view class="reminder-item" wx:for="{{medications}}" wx:key="id">
+      <view class="med-info">
+        <text class="med-name">{{item.name}}</text>
+        <text class="med-dose">{{item.dose}}</text>
+      </view>
+      <view class="time-settings">
+        <picker mode="time" value="{{item.time}}" bindchange="onTimeChange" data-id="{{item.id}}">
+          <view class="time-picker">{{item.time}}</view>
+        </picker>
+      </view>
+      <view class="reminder-actions">
+        <switch checked="{{item.enabled}}" bindchange="onReminderToggle" data-id="{{item.id}}" />
+      </view>
+    </view>
+  </view>
+
+  <button class="add-reminder-btn" bindtap="addReminder">+ 添加提醒</button>
+
+  <view class="reminder-settings">
+    <view class="setting-item">
+      <text>语音提醒</text>
+      <switch checked="{{voiceReminder}}" bindchange="onVoiceToggle" />
+    </view>
+    <view class="setting-item">
+      <text>振动提醒</text>
+      <switch checked="{{vibrationReminder}}" bindchange="onVibrationToggle" />
+    </view>
+  </view>
+</view>

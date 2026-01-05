@@ -1,0 +1,6 @@
+<view class="security-monitor">
+  <view class="security-alert" wx:if="{{showAlert}}">
+    <text class="alert-icon">⚠️</text>
+    <text class="alert-text">内容包含敏感信息，已自动处理</text>
+  </view>
+</view>
