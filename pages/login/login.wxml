@@ -1,0 +1,43 @@
+<view class="login-container">
+  <!-- 顶部背景 -->
+  <view class="login-header">
+    <view class="app-logo">💊</view>
+    <text class="app-title">精神健康用药助手</text>
+    <text class="app-subtitle">请选择您的身份开始使用</text>
+  </view>
+
+  <!-- 角色选择卡片 -->
+  <view class="role-selection">
+    <view class="role-card patient" bindtap="selectRole" data-role="patient">
+      <view class="role-icon">👤</view>
+      <view class="role-info">
+        <text class="role-name">患者登录</text>
+        <text class="role-desc">管理个人用药和健康记录</text>
+      </view>
+      <view class="role-arrow">›</view>
+    </view>
+
+    <view class="role-card doctor" bindtap="selectRole" data-role="doctor">
+      <view class="role-icon">👨‍⚕️</view>
+      <view class="role-info">
+        <text class="role-name">医生登录</text>
+        <text class="role-desc">查看患者情况和提供指导</text>
+      </view>
+      <view class="role-arrow">›</view>
+    </view>
+
+    <view class="role-card family" bindtap="selectRole" data-role="family">
+      <view class="role-icon">👪</view>
+      <view class="role-info">
+        <text class="role-name">家属登录</text>
+        <text class="role-desc">协助患者管理健康</text>
+      </view>
+      <view class="role-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="login-footer">
+    <text class="footer-text">选择身份后即可开始使用相关功能</text>
+  </view>
+</view>

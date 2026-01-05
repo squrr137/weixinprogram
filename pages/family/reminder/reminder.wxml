@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="header-card">
+    <view class="date">{{date}}</view>
+    <view class="title">今日服药计划</view>
+    <view class="subtitle">守护对象: <text class="highlight">{{patientName}}</text></view>
+  </view>
+
+  <view class="medication-list">
+    <block wx:if="{{reminders.length > 0}}">
+      <view class="medication-item {{item.status}}" wx:for="{{reminders}}" wx:key="id">
+        
+        <view class="time-column">
+          <text class="time">{{item.time}}</text>
+          <view class="status-dot {{item.status}}"></view>
+        </view>
+
+        <view class="info-column">
+          <view class="med-name">{{item.name}}</view>
+          <view class="med-dose">{{item.dose}} · {{item.instructions}}</view>
+        </view>
+
+        <view class="action-column">
+          <view wx:if="{{item.status === 'taken'}}" class="status-badge taken">
+            ✅ 已服
+          </view>
+          
+          <view wx:elif="{{item.status === 'missed'}}" class="status-badge missed">
+            ⚠️ 漏服
+          </view>
+          
+          <button wx:else class="remind-btn" size="mini" bindtap="sendReminder" data-name="{{item.name}}">
+            🔔 提醒
+          </button>
+        </view>
+        
+      </view>
+    </block>
+
+    <view wx:else class="empty-state">
+      <text>今日暂无服药计划</text>
+    </view>
+  </view>
+</view>

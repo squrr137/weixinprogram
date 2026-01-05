@@ -1,0 +1,237 @@
+.role-selection {
+    text-align: center;
+  }
+  
+  .role-btn {
+    width: 200rpx;
+    margin: 20rpx auto;
+    padding: 30rpx;
+    font-size: 32rpx;
+  }
+  
+  .role-btn.patient {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .role-btn.doctor {
+    background: #2196F3;
+    color: white;
+  }
+  
+  .role-btn.family {
+    background: #FF9800;
+    color: white;
+  }
+  
+  .current-role {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30rpx;
+  }
+  
+  .doctor-item, .patient-item, .member-item {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #eee;
+  }
+  
+  .doctor-item:last-child, .patient-item:last-child, .member-item:last-child {
+    border-bottom: none;
+  }
+  
+  .doctor-avatar, .patient-avatar, .member-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-right: 24rpx;
+  }
+  
+  .doctor-info, .patient-info, .member-info {
+    flex: 1;
+  }
+  
+  .doctor-name, .patient-name, .member-name {
+    display: block;
+    font-size: 28rpx;
+    font-weight: bold;
+    margin-bottom: 4rpx;
+  }
+  
+  .doctor-department, .patient-adherence, .member-relation {
+    display: block;
+    font-size: 24rpx;
+    color: #666;
+    margin-bottom: 4rpx;
+  }
+  
+  .doctor-hospital, .patient-lastVisit, .member-status {
+    display: block;
+    font-size: 22rpx;
+    color: #999;
+  }
+  
+  .contact-btn, .remind-btn {
+    padding: 16rpx 24rpx;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8rpx;
+    font-size: 24rpx;
+  }
+  
+  .patient-status {
+    padding: 8rpx 16rpx;
+    border-radius: 20rpx;
+    font-size: 22rpx;
+  }
+  
+  .patient-status.normal {
+    background: #E8F5E8;
+    color: #4CAF50;
+  }
+  
+  .patient-status.warning {
+    background: #FFEBEE;
+    color: #F44336;
+  }
+  
+  .share-settings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #eee;
+  }
+  
+  .share-settings:last-child {
+    border-bottom: none;
+  }
+  
+  .alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #FFEB3B;
+  }
+  
+  .alert-item:last-child {
+    border-bottom: none;
+  }
+  
+  .alert-time {
+    font-size: 22rpx;
+    color: #999;
+  }
+  
+  .chat-messages {
+    height: 400rpx;
+    overflow-y: auto;
+    margin-bottom: 20rpx;
+    padding: 20rpx;
+    background: #f8f9fa;
+    border-radius: 8rpx;
+  }
+  
+  .message {
+    margin-bottom: 20rpx;
+    max-width: 70%;
+  }
+  
+  .message.own {
+    margin-left: auto;
+    text-align: right;
+  }
+  
+  .message.other {
+    margin-right: auto;
+  }
+  
+  .message-content {
+    display: inline-block;
+    padding: 16rpx 24rpx;
+    background: white;
+    border-radius: 12rpx;
+    font-size: 28rpx;
+  }
+  
+  .message.own .message-content {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .message-time {
+    display: block;
+    font-size: 20rpx;
+    color: #999;
+    margin-top: 4rpx;
+  }
+  
+  .chat-input {
+    display: flex;
+    gap: 20rpx;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 20rpx;
+    border: 1rpx solid #ddd;
+    border-radius: 8rpx;
+  }
+  
+  .send-btn {
+    padding: 20rpx 40rpx;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8rpx;
+  }
+  
+  .message-item {
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #eee;
+    position: relative;
+  }
+  
+  .message-item:last-child {
+    border-bottom: none;
+  }
+  
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8rpx;
+  }
+  
+  .message-sender {
+    font-size: 28rpx;
+    font-weight: bold;
+  }
+  
+  .message-time {
+    font-size: 22rpx;
+    color: #999;
+  }
+  
+  .message-preview {
+    font-size: 26rpx;
+    color: #666;
+    display: block;
+    margin-bottom: 8rpx;
+  }
+  
+  .message-status {
+    font-size: 22rpx;
+  }
+  
+  .message-status.unread {
+    color: #F44336;
+    font-weight: bold;
+  }
+  
+  .message-status.read {
+    color: #999;
+  }

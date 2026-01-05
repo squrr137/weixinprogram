@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "服药管理",
+    "usingComponents": {
+      "medication-reminder": "/components/medication-reminder/medication-reminder",
+      "chart": "/components/chart/chart"
+    }
+  }

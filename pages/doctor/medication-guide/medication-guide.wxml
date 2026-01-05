@@ -1,0 +1,51 @@
+<view class="container">
+  <!-- 快速操作 -->
+  <view class="quick-actions card">
+    <view class="section-title">快速操作</view>
+    <view class="action-buttons">
+      <button class="btn-primary" bindtap="createGuide">新建指导方案</button>
+      <button class="btn-secondary" bindtap="viewTemplates">查看模板</button>
+    </view>
+  </view>
+
+  <!-- 常用药物库 -->
+  <view class="medication-library card">
+    <view class="section-title">常用药物库</view>
+    <view class="medication-tags">
+      <view class="medication-tag" wx:for="{{commonMeds}}" wx:key="id" bindtap="selectMedication" data-med="{{item}}">
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 指导方案列表 -->
+  <view class="guide-list">
+    <view class="section-title">我的指导方案</view>
+    <view class="guide-item card" wx:for="{{guides}}" wx:key="id">
+      <view class="guide-header">
+        <text class="guide-title">{{item.title}}</text>
+        <text class="guide-date">{{item.createTime}}</text>
+      </view>
+      <view class="guide-content">
+        <text class="guide-desc">{{item.description}}</text>
+      </view>
+      <view class="guide-medications">
+        <text class="meds-label">包含药物：</text>
+        <text class="meds-list" wx:for="{{item.medications}}" wx:for-item="med" wx:key="name">
+          {{med.name}}{{med.dose}} 
+        </text>
+      </view>
+      <view class="guide-actions">
+        <button class="btn-secondary" bindtap="editGuide" data-id="{{item.id}}">编辑</button>
+        <button class="btn-primary" bindtap="assignGuide" data-id="{{item.id}}">分配给患者</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{guides.length === 0}}">
+    <text class="empty-icon">💊</text>
+    <text class="empty-text">暂无用药指导方案</text>
+    <button class="btn-primary" bindtap="createGuide">创建第一个方案</button>
+  </view>
+</view>

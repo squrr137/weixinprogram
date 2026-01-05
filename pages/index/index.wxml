@@ -1,0 +1,106 @@
+<view class="container">
+  <!-- 用户信息和角色切换 -->
+  <view class="user-info card">
+    <view class="flex-row">
+      <view class="user-avatar">{{userRole === 'patient' ? '👤' : userRole === 'doctor' ? '👨‍⚕️' : '👪'}}</view>
+      <view class="user-details">
+        <text class="username">欢迎，{{welcomeText}}</text>
+        <text class="user-role">当前身份：{{welcomeText}}端</text>
+        <view wx:if="{{userRole === 'patient'}}" class="medication-status">
+          <text>今日已服药：{{todayMedicationCount}}/{{totalMedicationCount}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="user-actions">
+      <button class="btn-switch" bindtap="switchRole">切换身份</button>
+      <button class="btn-logout" bindtap="logout">退出</button>
+    </view>
+  </view>
+
+  <!-- 功能模块网格 - 移除当前页面标识 -->
+  <view class="grid">
+    <view class="grid-item" 
+          wx:for="{{modules}}" 
+          wx:key="name" 
+          bindtap="navigateTo" 
+          data-url="{{item.path}}">
+      <view class="icon">{{item.icon}}</view>
+      <text class="name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 患者专属内容 -->
+  <view wx:if="{{userRole === 'patient'}}">
+    <!-- 激励卡片 -->
+    <view class="motivation-card card">
+      <view class="section-title">今日激励</view>
+      <text class="motivation-text">{{dailyMotivation}}</text>
+      <view class="streak">
+        <text>连续打卡：{{streakDays}}天</text>
+        <text class="points">积分：{{points}}</text>
+      </view>
+    </view>
+
+    <!-- 快捷统计 -->
+    <view class="stats-grid card">
+      <view class="section-title">健康统计</view>
+      <view class="stats-row">
+        <view class="stat-item">
+          <text class="stat-value">{{adherenceRate}}%</text>
+          <text class="stat-label">服药依从率</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{streakDays}}</text>
+          <text class="stat-label">连续天数</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{totalDoses}}</text>
+          <text class="stat-label">总服药次数</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 医生专属内容 -->
+  <view wx:if="{{userRole === 'doctor'}}">
+    <view class="doctor-stats card">
+      <view class="section-title">工作概览</view>
+      <view class="stats-row">
+        <view class="stat-item">
+          <text class="stat-value">12</text>
+          <text class="stat-label">管理患者</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">3</text>
+          <text class="stat-label">待处理</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">85%</text>
+          <text class="stat-label">平均依从率</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 家属专属内容 -->
+  <view wx:if="{{userRole === 'family'}}">
+    <view class="family-overview card">
+      <view class="section-title">照护概览</view>
+      <view class="care-stats">
+        <text>今日提醒：{{todayMedicationCount}}/{{totalMedicationCount}}</text>
+        <text>最近评估：良好</text>
+        <text>下次复诊：2025-11-15</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="nav-item" bindtap="goToChat">
+  <image src="..." />
+  <text>家庭聊天</text>
+</view>
+
+<view class="nav-item" bindtap="goToConsultation"> 
+  <view class="icon-box">🩺</view>
+  <text>医生沟通</text>
+</view>

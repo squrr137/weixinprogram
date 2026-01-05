@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="sos-area">
+    <view class="sos-circle" bindtap="callEmergency">
+      <view class="sos-text">SOS</view>
+      <view class="sos-sub">呼叫 120</view>
+    </view>
+    <view class="location-btn" bindtap="sendCurrentLocation">
+      <text class="icon">📍</text>
+      <text>发送我的位置给家属</text>
+    </view>
+  </view>
+
+  <view class="contact-section">
+    <view class="section-title">紧急联系人</view>
+    
+    <block wx:for="{{contacts}}" wx:key="id">
+      <view class="contact-card" bindtap="callContact" data-phone="{{item.phone}}" data-name="{{item.name}}">
+        <view class="info">
+          <view class="name">
+            {{item.name}} 
+            <text class="role">{{item.role}}</text>
+          </view>
+          <view class="phone">{{item.phone}}</view>
+        </view>
+        <view class="call-btn">
+          📞 拨打
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

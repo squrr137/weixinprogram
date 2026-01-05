@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "健康社区",
+    "usingComponents": {
+      "security-monitor": "/components/security-monitor/security-monitor"
+    }
+  }

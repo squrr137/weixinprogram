@@ -1,0 +1,114 @@
+<view class="container">
+  <view class="assessment-header card">
+    <view class="header-content">
+      <text class="header-title">健康评估中心</text>
+      <text class="header-desc">定期评估，更好了解自己的健康状况</text>
+    </view>
+  </view>
+
+  <view class="assessment-types">
+    <view class="type-card card" bindtap="startAssessment" data-type="medicationKnowledge">
+      <view class="type-icon">💊</view>
+      <view class="type-info">
+        <text class="type-title">药物素养测评</text>
+        <text class="type-desc">检测用药知识理解度，提供学习建议</text>
+      </view>
+      <view class="type-status">
+        <text class="last-score" wx:if="{{lastScores.medicationKnowledge}}">
+          上次得分：{{lastScores.medicationKnowledge}}
+        </text>
+        <text class="take-test">开始测试 →</text>
+      </view>
+    </view>
+
+    <view class="type-card card" bindtap="startAssessment" data-type="adherence">
+      <view class="type-icon">📈</view>
+      <view class="type-info">
+        <text class="type-title">服药依从性测评</text>
+        <text class="type-desc">基于MMAS-8简化量表，评估服药依从性</text>
+      </view>
+      <view class="type-status">
+        <text class="last-score" wx:if="{{lastScores.adherence}}">
+          上次得分：{{lastScores.adherence}}
+        </text>
+        <text class="take-test">开始测试 →</text>
+      </view>
+    </view>
+
+    <view class="type-card card" bindtap="startAssessment" data-type="symptom">
+      <view class="type-icon">😊</view>
+      <view class="type-info">
+        <text class="type-title">症状自评</text>
+        <text class="type-desc">评估近期症状变化，跟踪康复进展</text>
+      </view>
+      <view class="type-status">
+        <text class="last-score" wx:if="{{lastScores.symptom}}">
+          上次评估：{{lastScores.symptom}}
+        </text>
+        <text class="take-test">开始评估 →</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="current-assessment card" wx:if="{{currentAssessment}}">
+    <view class="section-title">当前测评：{{assessmentTitles[currentAssessment.type]}}</view>
+    
+    <quiz wx:if="{{!assessmentCompleted}}" 
+          questions="{{currentQuestions}}" 
+          module-id="{{currentAssessment.type}}"
+          bind:completed="onAssessmentCompleted" />
+
+    <view class="assessment-result" wx:else>
+      <view class="result-header">
+        <text class="result-title">测评完成</text>
+        <text class="result-score">得分：{{currentScore}}/{{totalQuestions}}</text>
+      </view>
+      
+      <view class="result-analysis">
+        <text class="analysis-title">分析结果：</text>
+        <text class="analysis-content">{{resultAnalysis}}</text>
+      </view>
+
+      <view class="recommendations">
+        <text class="rec-title">个性化建议：</text>
+        <view class="rec-list">
+          <text class="rec-item" wx:for="{{recommendations}}" wx:key="index">• {{item}}</text>
+        </view>
+      </view>
+
+      <view class="result-actions">
+        <button class="btn-primary" bindtap="viewDetailedReport">查看详细报告</button>
+        <button class="btn-secondary" bindtap="retakeAssessment">重新测试</button>
+        <button class="btn-secondary" wx:if="{{currentAssessment.type === 'medicationKnowledge'}}" 
+                bindtap="goToEducationCenter">
+          学习相关知识
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="assessment-history card" wx:if="{{assessmentHistory.length > 0}}">
+    <view class="section-title">历史评估记录</view>
+    <view class="history-list">
+      <view class="history-item" wx:for="{{assessmentHistory}}" wx:key="date">
+        <view class="history-info">
+          <text class="history-type">{{item.type}}</text>
+          <text class="history-date">{{item.date}}</text>
+        </view>
+        <view class="history-score {{getScoreClass(item.score)}}">
+          {{item.score}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="assessment-tips card">
+    <view class="section-title">💡 测评提示</view>
+    <view class="tips-list">
+      <text class="tip-item">• 请根据实际情况如实回答</text>
+      <text class="tip-item">• 测评结果仅作参考，不能替代专业诊断</text>
+      <text class="tip-item">• 建议每月进行一次全面评估</text>
+      <text class="tip-item">• 如有疑问，请及时咨询医生</text>
+    </view>
+  </view>
+</view>

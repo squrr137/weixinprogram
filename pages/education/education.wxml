@@ -1,0 +1,40 @@
+<view class="container">
+  <view class="search-box card">
+    <input placeholder="搜索药物知识..." bindinput="onSearchInput" />
+  </view>
+
+  <view class="knowledge-categories">
+    <view class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+          wx:for="{{categories}}" wx:key="id" 
+          bindtap="switchCategory" data-category="{{item.id}}">
+      {{item.name}}
+    </view>
+  </view>
+
+  <view class="knowledge-list">
+    <view class="knowledge-item card" wx:for="{{filteredKnowledge}}" wx:key="id" bindtap="viewDetail" data-item="{{item}}">
+      <view class="item-header">
+        <text class="item-title">{{item.title}}</text>
+        <text class="item-type {{item.type}}">{{item.type === 'video' ? '视频' : '图文'}}</text>
+      </view>
+      <text class="item-desc">{{item.description}}</text>
+      <view class="item-meta">
+        <text class="duration" wx:if="{{item.duration}}">时长：{{item.duration}}</text>
+        <text class="read-count">学习：{{item.readCount}}次</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="quiz-section card" wx:if="{{currentCategory}}">
+    <view class="section-title">知识小测验</view>
+    <quiz questions="{{quizQuestions}}" module-id="{{currentCategory}}" bind:completed="onQuizCompleted" />
+  </view>
+
+  <view class="myths-section card">
+    <view class="section-title">常见误区纠正</view>
+    <view class="myth-item" wx:for="{{commonMyths}}" wx:key="id">
+      <view class="myth-question">❌ {{item.myth}}</view>
+      <view class="myth-answer">✅ {{item.truth}}</view>
+    </view>
+  </view>
+</view>

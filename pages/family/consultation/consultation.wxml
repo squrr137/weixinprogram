@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="doctor-card">
+    <view class="doctor-info">
+      <image class="avatar" src="{{doctor.avatar}}" mode="aspectFill"></image>
+      <view class="info-text">
+        <view class="name-row">
+          <text class="name">{{doctor.name}}</text>
+          <text class="title">{{doctor.title}}</text>
+        </view>
+        <view class="dept">{{doctor.department}} | {{doctor.hospital}}</view>
+        <view class="tags">
+          <text class="tag" wx:for="{{doctor.tags}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="stats-row">
+      <view class="stat-item">
+        <text class="num">{{doctor.responseRate}}%</text>
+        <text class="label">回复率</text>
+      </view>
+      <view class="stat-item">
+        <text class="num">{{doctor.consultCount}}</text>
+        <text class="label">服务人次</text>
+      </view>
+      <view class="stat-item">
+        <text class="num">{{doctor.satisfaction}}</text>
+        <text class="label">满意度</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="service-grid">
+    <view class="service-item" bindtap="startTextConsult">
+      <view class="icon-circle blue">💬</view>
+      <text class="service-name">图文咨询</text>
+      <text class="service-desc">描述病情 医生解答</text>
+    </view>
+    <view class="service-item" bindtap="startPhoneConsult">
+      <view class="icon-circle green">📞</view>
+      <text class="service-name">电话咨询</text>
+      <text class="service-desc">如需紧急沟通</text>
+    </view>
+  </view>
+
+  <view class="history-section">
+    <view class="section-header">
+      <text class="title">咨询记录</text>
+      <text class="more">查看全部 ></text>
+    </view>
+    
+    <block wx:for="{{historyList}}" wx:key="id">
+      <view class="history-card">
+        <view class="card-top">
+          <text class="date">{{item.date}}</text>
+          <text class="status {{item.status === 'replied' ? 'done' : 'wait'}}">
+            {{item.status === 'replied' ? '已回复' : '待回复'}}
+          </text>
+        </view>
+        <view class="question-box">
+          <text class="label">问</text>
+          <text class="content">{{item.question}}</text>
+        </view>
+        <view class="answer-box" wx:if="{{item.reply}}">
+          <text class="label">答</text>
+          <text class="content">{{item.reply}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

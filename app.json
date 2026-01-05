@@ -1,0 +1,37 @@
+{
+    "pages": [
+      "pages/login/login",
+      "pages/index/index",
+      "pages/education/education",
+      "pages/medication/medication",
+      "pages/motivation/motivation",
+      "pages/community/community",
+      "pages/interaction/interaction",
+      "pages/assessment/assessment",
+      "pages/doctor/patients/patients",
+      "pages/doctor/medication-guide/medication-guide",
+      "pages/family/reminder/reminder",
+      "pages/family/record/record",
+      "pages/family/chat/chat",
+      "pages/family/progress/progress",
+      "pages/family/emergency/emergency",
+      "pages/family/consultation/consultation"
+    ],
+
+    "permission": {
+      "scope.userLocation": {
+        "desc": "我们需要您的位置以便在紧急情况下发送给家属"
+      }
+    },
+
+    "window": {
+      "navigationBarTitleText": "精神健康用药助手",
+      "navigationBarBackgroundColor": "#4CAF50",
+      "navigationBarTextStyle": "white",
+      "backgroundColor": "#f8f9fa",
+      "backgroundTextStyle": "light"
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+  }

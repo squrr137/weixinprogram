@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "服药提醒",
+    "usingComponents": {
+      "medication-reminder": "/components/medication-reminder/medication-reminder"
+    }
+  }

@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="hero-card">
+    <view class="hero-info">
+      <view class="hero-label">本周服药依从性</view>
+      <view class="hero-value">
+        <text class="num">{{averageAdherence}}</text>
+        <text class="unit">%</text>
+      </view>
+      <view class="hero-tag">表现优秀</view>
+    </view>
+    <view class="hero-icon">💊</view>
+  </view>
+
+  <view class="chart-card">
+    <view class="card-header">
+      <view class="icon-box blue-bg">💊</view>
+      <text class="card-title">服药趋势</text>
+    </view>
+    <view class="chart-content">
+      <chart type="line" data="{{adherenceData}}" />
+    </view>
+  </view>
+
+  <view class="chart-card">
+    <view class="card-header">
+      <view class="icon-box green-bg">📈</view>
+      <text class="card-title">健康指标趋势</text>
+    </view>
+    <view class="chart-content">
+      <chart type="line" data="{{healthData}}" color="#34C759" />
+    </view>
+  </view>
+
+  <view class="chart-card">
+    <view class="card-header">
+      <view class="icon-box orange-bg">📋</view>
+      <text class="card-title">评估问卷得分</text>
+    </view>
+    <view class="chart-content">
+      <chart type="line" data="{{assessmentData}}" color="#FF9500" />
+    </view>
+  </view>
+</view>

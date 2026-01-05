@@ -1,0 +1,82 @@
+<view class="container">
+  <!-- 统计概览 -->
+  <view class="stats-overview card">
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number">12</text>
+        <text class="stat-label">管理患者</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">3</text>
+        <text class="stat-label">需关注</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">85%</text>
+        <text class="stat-label">平均依从率</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">2</text>
+        <text class="stat-label">待回复</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索和筛选 -->
+  <view class="search-filter card">
+    <view class="search-box">
+      <input placeholder="搜索患者姓名..." bindinput="onSearchInput" />
+      <text class="search-icon">🔍</text>
+    </view>
+    <view class="filter-tabs">
+      <view class="filter-tab {{currentFilter === 'all' ? 'active' : ''}}" 
+            bindtap="setFilter" data-filter="all">全部</view>
+      <view class="filter-tab {{currentFilter === 'attention' ? 'active' : ''}}" 
+            bindtap="setFilter" data-filter="attention">需关注</view>
+      <view class="filter-tab {{currentFilter === 'recent' ? 'active' : ''}}" 
+            bindtap="setFilter" data-filter="recent">最近联系</view>
+    </view>
+  </view>
+
+  <!-- 患者列表 -->
+  <view class="patients-list">
+    <view class="patient-item card" wx:for="{{filteredPatients}}" wx:key="id" bindtap="viewPatientDetail" data-id="{{item.id}}">
+      <view class="patient-header">
+        <view class="patient-avatar">{{item.avatar}}</view>
+        <view class="patient-info">
+          <text class="patient-name">{{item.name}}</text>
+          <text class="patient-diagnosis">{{item.diagnosis}}</text>
+          <text class="patient-lastVisit">上次复诊：{{item.lastVisit}}</text>
+        </view>
+        <view class="patient-status {{item.needAttention ? 'warning' : 'normal'}}">
+          {{item.needAttention ? '需关注' : '良好'}}
+        </view>
+      </view>
+      
+      <view class="patient-stats">
+        <view class="stat">
+          <text class="stat-label">服药依从率</text>
+          <text class="stat-value {{item.adherenceRate < 80 ? 'low' : ''}}">{{item.adherenceRate}}%</text>
+        </view>
+        <view class="stat">
+          <text class="stat-label">最近评估</text>
+          <text class="stat-value">{{item.lastAssessment}}</text>
+        </view>
+        <view class="stat">
+          <text class="stat-label">未读消息</text>
+          <text class="stat-value {{item.unreadMessages > 0 ? 'has-message' : ''}}">{{item.unreadMessages}}</text>
+        </view>
+      </view>
+
+      <view class="patient-actions">
+        <button class="btn-secondary" bindtap="sendMessage" data-id="{{item.id}}">发消息</button>
+        <button class="btn-primary" bindtap="viewRecords" data-id="{{item.id}}">查看记录</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{filteredPatients.length === 0}}">
+    <text class="empty-icon">👥</text>
+    <text class="empty-text">暂无患者数据</text>
+  </view>
+</view>

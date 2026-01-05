@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="user-stats card">
+    <view class="stats-overview">
+      <view class="stat-circle">
+        <text class="stat-number">{{streakDays}}</text>
+        <text class="stat-label">连续打卡</text>
+      </view>
+      <view class="stat-circle">
+        <text class="stat-number">{{totalPoints}}</text>
+        <text class="stat-label">总积分</text>
+      </view>
+      <view class="stat-circle">
+        <text class="stat-number">{{adherenceRate}}%</text>
+        <text class="stat-label">依从率</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="achievements card">
+    <view class="section-title">🏆 成就徽章</view>
+    <view class="badges-grid">
+      <view class="badge {{badge.earned ? 'earned' : 'locked'}}" wx:for="{{badges}}" wx:key="id">
+        <view class="badge-icon">{{badge.earned ? badge.icon : '🔒'}}</view>
+        <text class="badge-name">{{badge.name}}</text>
+        <text class="badge-desc">{{badge.description}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="points-history card">
+    <view class="section-title">📈 积分记录</view>
+    <view class="points-list">
+      <view class="points-item" wx:for="{{pointsHistory}}" wx:key="date">
+        <view class="points-info">
+          <text class="points-action">{{item.action}}</text>
+          <text class="points-date">{{item.date}}</text>
+        </view>
+        <text class="points-change {{item.change > 0 ? 'positive' : 'negative'}}">
+          {{item.change > 0 ? '+' : ''}}{{item.change}}
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <view class="daily-motivation card">
+    <view class="section-title">💫 每日激励</view>
+    <text class="motivation-text">{{dailyMotivation}}</text>
+    <button class="btn-primary" bindtap="shareAchievement">分享成就</button>
+  </view>
+
+  <view class="growth-chart card">
+    <view class="section-title">📊 健康成长曲线</view>
+    <chart data="{{growthChartData}}" type="line" />
+  </view>
+
+  <view class="rewards card" wx:if="{{availableRewards.length > 0}}">
+    <view class="section-title">🎁 可兑换奖励</view>
+    <view class="rewards-list">
+      <view class="reward-item" wx:for="{{availableRewards}}" wx:key="id">
+        <view class="reward-info">
+          <text class="reward-name">{{item.name}}</text>
+          <text class="reward-desc">{{item.description}}</text>
+        </view>
+        <button class="exchange-btn" bindtap="exchangeReward" data-id="{{item.id}}">
+          兑换 {{item.points}}积分
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

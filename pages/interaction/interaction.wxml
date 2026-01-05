@@ -1,0 +1,132 @@
+<view class="container">
+  <!-- 移除角色选择部分 -->
+  
+  <view class="interaction-content">
+    <view class="current-role card">
+      <text>当前身份：{{roleNames[currentRole]}}端</text>
+    </view>
+
+    <!-- 患者视图 -->
+    <view wx:if="{{currentRole === 'patient'}}">
+      <view class="my-doctors card">
+        <view class="section-title">👨‍⚕️ 我的医生</view>
+        <view class="doctor-list">
+          <view class="doctor-item" wx:for="{{myDoctors}}" wx:key="id">
+            <image src="{{item.avatar}}" class="doctor-avatar"></image>
+            <view class="doctor-info">
+              <text class="doctor-name">{{item.name}}</text>
+              <text class="doctor-department">{{item.department}}</text>
+              <text class="doctor-hospital">{{item.hospital}}</text>
+            </view>
+            <button class="contact-btn" bindtap="contactDoctor" data-id="{{item.id}}">联系</button>
+          </view>
+        </view>
+      </view>
+
+      <view class="medication-records card">
+        <view class="section-title">📊 服药记录共享</view>
+        <view class="share-settings">
+          <text>向医生共享我的服药记录</text>
+          <switch checked="{{shareWithDoctors}}" bindchange="toggleShareWithDoctors" />
+        </view>
+        <view class="share-settings">
+          <text>向家属共享我的服药记录</text>
+          <switch checked="{{shareWithFamily}}" bindchange="toggleShareWithFamily" />
+        </view>
+      </view>
+
+      <view class="online-experts card">
+        <view class="section-title">👨‍⚕️ 在线专家</view>
+        <view class="experts-list">
+          <view class="expert-item" wx:for="{{onlineExperts}}" wx:key="id">
+            <image src="{{item.avatar}}" class="expert-avatar"></image>
+            <view class="expert-info">
+              <text class="expert-name">{{item.name}}</text>
+              <text class="expert-department">{{item.department}}</text>
+            </view>
+            <view class="expert-status {{item.online ? 'online' : 'offline'}}">
+              {{item.online ? '在线' : '离线'}}
+            </view>
+            <button class="contact-btn" wx:if="{{item.online}}" bindtap="contactExpert" data-id="{{item.id}}">咨询</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 医生视图 -->
+    <view wx:if="{{currentRole === 'doctor'}}">
+      <view class="my-patients card">
+        <view class="section-title">👥 我的患者</view>
+        <view class="patient-list">
+          <view class="patient-item" wx:for="{{myPatients}}" wx:key="id" bindtap="viewPatientDetail" data-id="{{item.id}}">
+            <image src="{{item.avatar}}" class="patient-avatar"></image>
+            <view class="patient-info">
+              <text class="patient-name">{{item.name}}</text>
+              <text class="patient-adherence">依从率：{{item.adherenceRate}}%</text>
+              <text class="patient-lastVisit">上次复诊：{{item.lastVisit}}</text>
+            </view>
+            <view class="patient-status {{item.needAttention ? 'warning' : 'normal'}}">
+              {{item.needAttention ? '需关注' : '良好'}}
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="patient-alerts card" wx:if="{{patientAlerts.length > 0}}">
+        <view class="section-title text-warning">⚠️ 患者预警</view>
+        <view class="alert-item" wx:for="{{patientAlerts}}" wx:key="patientId">
+          <text>{{item.patientName}} - {{item.alertType}}</text>
+          <text class="alert-time">{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 家属视图 -->
+    <view wx:if="{{currentRole === 'family'}}">
+      <view class="family-members card">
+        <view class="section-title">👨‍👩‍👧‍👦 照护成员</view>
+        <view class="member-list">
+          <view class="member-item" wx:for="{{familyMembers}}" wx:key="id">
+            <image src="{{item.avatar}}" class="member-avatar"></image>
+            <view class="member-info">
+              <text class="member-name">{{item.name}}</text>
+              <text class="member-relation">{{item.relation}}</text>
+              <text class="member-status">今日服药：{{item.todayMedication}}</text>
+            </view>
+            <button class="remind-btn" bindtap="sendReminder" data-id="{{item.id}}">提醒</button>
+          </view>
+        </view>
+      </view>
+
+      <view class="family-chat card">
+        <view class="section-title">💬 家庭聊天室</view>
+        <view class="chat-messages">
+          <view class="message {{message.sender === 'me' ? 'own' : 'other'}}" 
+                wx:for="{{familyChat}}" wx:key="id">
+            <text class="message-content">{{message.content}}</text>
+            <text class="message-time">{{message.time}}</text>
+          </view>
+        </view>
+        <view class="chat-input">
+          <input placeholder="输入消息..." bindinput="onChatInput" value="{{chatMessage}}" />
+          <button class="send-btn" bindtap="sendMessage">发送</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 通用消息中心 -->
+    <view class="message-center card">
+      <view class="section-title">📨 消息中心</view>
+      <view class="message-list">
+        <view class="message-item" wx:for="{{messages}}" wx:key="id" bindtap="viewMessage" data-id="{{item.id}}">
+          <view class="message-header">
+            <text class="message-sender">{{item.sender}}</text>
+            <text class="message-time">{{item.time}}</text>
+          </view>
+          <text class="message-preview">{{item.preview}}</text>
+          <text class="message-status {{item.unread ? 'unread' : 'read'}}">{{item.unread ? '未读' : '已读'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

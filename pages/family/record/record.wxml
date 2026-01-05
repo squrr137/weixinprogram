@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="patient-card" wx:if="{{patient}}">
+    <view class="avatar-area">
+      <view class="avatar">{{patient.name[0]}}</view>
+    </view>
+    <view class="info-area">
+      <view class="name">{{patient.name}} <text class="tag">{{patient.status}}</text></view>
+      <view class="diagnosis">诊断: {{patient.diagnosis}}</view>
+    </view>
+  </view>
+
+  <view class="stats-row">
+    <view class="stat-item">
+      <view class="stat-value">{{stats.averageAdherence}}%</view>
+      <view class="stat-label">近期服药率</view>
+    </view>
+    <view class="line"></view>
+    <view class="stat-item">
+      <view class="stat-value">{{stats.safeDays}}天</view>
+      <view class="stat-label">状态平稳</view>
+    </view>
+  </view>
+
+  <view class="history-section">
+    <view class="section-title">近一周记录</view>
+    
+    <block wx:for="{{historyList}}" wx:key="id">
+      <view class="history-card">
+        <view class="date-col">
+          <text>{{item.date}}</text>
+        </view>
+
+        <view class="detail-col">
+          <view class="row">
+            <text class="mood">情绪: {{item.mood}}</text>
+            <text class="adherence {{item.adherence < 80 ? 'low' : ''}}">服药: {{item.adherence}}%</text>
+          </view>
+          <view class="note">{{item.note}}</view>
+        </view>
+
+        <view class="status-col">
+          <view class="dot {{item.status}}"></view>
+        </view>
+      </view>
+    </block>
+    
+    <view wx:if="{{historyList.length === 0}}" class="empty">暂无记录</view>
+  </view>
+</view>

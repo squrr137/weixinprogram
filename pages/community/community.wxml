@@ -1,0 +1,102 @@
+<view class="container">
+  <view class="community-header card">
+    <view class="welcome-message">
+      <text class="welcome-title">欢迎来到健康社区</text>
+      <text class="welcome-desc">在这里分享经验，互相支持</text>
+    </view>
+    <button class="btn-primary" bindtap="createPost">发布动态</button>
+  </view>
+
+  <view class="community-tabs">
+    <view class="tab {{currentTab === 'posts' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="posts">
+      最新动态
+    </view>
+    <view class="tab {{currentTab === 'stories' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="stories">
+      康复故事
+    </view>
+    <view class="tab {{currentTab === 'qa' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="qa">
+      专家答疑
+    </view>
+  </view>
+
+  <view class="posts-list" wx:if="{{currentTab === 'posts'}}">
+    <view class="post-item card" wx:for="{{posts}}" wx:key="id">
+      <view class="post-header">
+        <image src="{{item.avatar}}" class="post-avatar"></image>
+        <view class="post-user">
+          <text class="username">{{item.username}}</text>
+          <text class="post-time">{{item.time}}</text>
+        </view>
+      </view>
+      <view class="post-content">
+        <text>{{item.content}}</text>
+      </view>
+      <security-monitor content="{{item.content}}" />
+      <view class="post-actions">
+        <view class="action-item" bindtap="likePost" data-id="{{item.id}}">
+          <text class="icon">❤️</text>
+          <text>{{item.likes}}</text>
+        </view>
+        <view class="action-item" bindtap="commentPost" data-id="{{item.id}}">
+          <text class="icon">💬</text>
+          <text>{{item.comments}}</text>
+        </view>
+        <view class="action-item" bindtap="sharePost" data-id="{{item.id}}">
+          <text class="icon">↗️</text>
+          <text>分享</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="stories-list" wx:if="{{currentTab === 'stories'}}">
+    <view class="story-item card" wx:for="{{recoveryStories}}" wx:key="id" bindtap="viewStory" data-id="{{item.id}}">
+      <view class="story-header">
+        <text class="story-title">{{item.title}}</text>
+        <text class="story-author">by {{item.author}}</text>
+      </view>
+      <view class="story-excerpt">
+        <text>{{item.excerpt}}</text>
+      </view>
+      <view class="story-stats">
+        <text class="read-count">阅读：{{item.readCount}}</text>
+        <text class="like-count">点赞：{{item.likeCount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="qa-list" wx:if="{{currentTab === 'qa'}}">
+    <view class="qa-item card" wx:for="{{expertQA}}" wx:key="id">
+      <view class="question">
+        <text class="q-label">问：</text>
+        <text class="q-content">{{item.question}}</text>
+      </view>
+      <view class="answer">
+        <text class="a-label">答：</text>
+        <text class="a-content">{{item.answer}}</text>
+      </view>
+      <view class="expert-info">
+        <text>{{item.expert}} · {{item.department}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="online-experts card">
+    <view class="section-title">👨‍⚕️ 在线专家</view>
+    <view class="experts-list">
+      <view class="expert-item" wx:for="{{onlineExperts}}" wx:key="id">
+        <image src="{{item.avatar}}" class="expert-avatar"></image>
+        <view class="expert-info">
+          <text class="expert-name">{{item.name}}</text>
+          <text class="expert-department">{{item.department}}</text>
+        </view>
+        <view class="expert-status {{item.online ? 'online' : 'offline'}}">
+          {{item.online ? '在线' : '离线'}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

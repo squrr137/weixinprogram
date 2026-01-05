@@ -1,0 +1,57 @@
+<view class="container">
+  <view class="today-medication card">
+    <view class="section-title">今日服药计划</view>
+    <view class="medication-list">
+      <view class="medication-item {{item.taken ? 'taken' : ''}}" wx:for="{{todayMedications}}" wx:key="id">
+        <view class="medication-info">
+          <text class="med-name">{{item.name}}</text>
+          <text class="med-dose">{{item.dose}}</text>
+          <text class="med-time">{{item.time}}</text>
+        </view>
+        <button class="take-btn {{item.taken ? 'taken' : ''}}" 
+                bindtap="takeMedication" 
+                data-id="{{item.id}}"
+                disabled="{{item.taken}}">
+          {{item.taken ? '已服用' : '标记服用'}}
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="reminder-settings card">
+    <view class="section-title">提醒设置</view>
+    <medication-reminder medications="{{medications}}" bind:reminderUpdate="onReminderUpdate" />
+  </view>
+
+  <view class="statistics card">
+    <view class="section-title">服药统计</view>
+    <chart data="{{chartData}}" type="line" />
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{adherenceRate}}%</text>
+        <text class="stat-label">依从率</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{streakDays}}</text>
+        <text class="stat-label">连续天数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{totalDoses}}</text>
+        <text class="stat-label">总剂量</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="stock-warning card" wx:if="{{lowStockMeds.length > 0}}">
+    <view class="section-title text-warning">⚠️ 药品库存预警</view>
+    <view class="warning-item" wx:for="{{lowStockMeds}}" wx:key="id">
+      <text>{{item.name}} 剩余 {{item.stock}} 天用量</text>
+    </view>
+  </view>
+
+  <view class="appointment-reminder card" wx:if="{{nextAppointment}}">
+    <view class="section-title">📅 复诊提醒</view>
+    <text>下次复诊：{{nextAppointment.date}}</text>
+    <text>医生：{{nextAppointment.doctor}}</text>
+  </view>
+</view>

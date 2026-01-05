@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "chart": "../../../components/chart/chart"
+  },
+  "navigationBarTitleText": "康复进度"
+}

@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "用药知识教育",
+    "usingComponents": {
+      "quiz": "/components/quiz/quiz"
+    }
+  }

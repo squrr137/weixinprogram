@@ -1,0 +1,46 @@
+<view class="chat-container">
+  <scroll-view 
+    class="message-list" 
+    scroll-y="true" 
+    scroll-into-view="{{toView}}" 
+    scroll-with-animation="true"
+  >
+    <block wx:for="{{messages}}" wx:key="id">
+      
+      <view wx:if="{{item.type === 'system'}}" class="system-msg" id="msg-{{item.id}}">
+        <text class="system-text">{{item.content}}</text>
+      </view>
+
+      <view wx:else class="message-item {{item.isSelf ? 'self' : 'other'}}" id="msg-{{item.id}}">
+        <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        
+        <view class="content-wrapper">
+          <text wx:if="{{!item.isSelf}}" class="nickname">{{item.senderName}}</text>
+          
+          <view class="bubble">
+            <text>{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+
+    </block>
+    <view class="placeholder" id="bottom-anchor"></view>
+  </scroll-view>
+
+  <view class="footer">
+    <view class="input-box">
+      <input 
+        class="input" 
+        value="{{inputValue}}" 
+        bindinput="onInput" 
+        bindconfirm="sendMessage" 
+        confirm-type="send"
+        placeholder="给家人留言..." 
+        placeholder-class="placeholder-text"
+      />
+    </view>
+    <view class="send-btn {{inputValue ? 'active' : ''}}" bindtap="sendMessage">
+      发送
+    </view>
+  </view>
+</view>

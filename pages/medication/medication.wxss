@@ -1,0 +1,93 @@
+.today-medication {
+    margin-bottom: 30rpx;
+  }
+  
+  .medication-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #eee;
+  }
+  
+  .medication-item:last-child {
+    border-bottom: none;
+  }
+  
+  .medication-item.taken {
+    opacity: 0.6;
+  }
+  
+  .medication-info {
+    flex: 1;
+  }
+  
+  .med-name {
+    display: block;
+    font-size: 32rpx;
+    font-weight: bold;
+    margin-bottom: 8rpx;
+  }
+  
+  .med-dose, .med-time {
+    display: block;
+    font-size: 26rpx;
+    color: #666;
+    margin-bottom: 4rpx;
+  }
+  
+  .take-btn {
+    padding: 16rpx 32rpx;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8rpx;
+    font-size: 26rpx;
+  }
+  
+  .take-btn.taken {
+    background: #ccc;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20rpx;
+    margin-top: 30rpx;
+  }
+  
+  .stat-item {
+    text-align: center;
+    padding: 20rpx;
+    background: #f8f9fa;
+    border-radius: 8rpx;
+  }
+  
+  .stat-value {
+    display: block;
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 8rpx;
+  }
+  
+  .stat-label {
+    font-size: 24rpx;
+    color: #666;
+  }
+  
+  .warning-item {
+    padding: 16rpx 0;
+    border-bottom: 1rpx solid #FFEB3B;
+    color: #FF9800;
+  }
+  
+  .warning-item:last-child {
+    border-bottom: none;
+  }
+  
+  .appointment-reminder text {
+    display: block;
+    margin-bottom: 8rpx;
+    font-size: 28rpx;
+  }
